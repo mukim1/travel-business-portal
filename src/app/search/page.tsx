@@ -9,7 +9,6 @@ import { useSearch } from "@/contexts/SearchContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { Plane, ArrowRight, Filter } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import {
   Sheet,
   SheetContent,
@@ -19,19 +18,14 @@ import {
 } from "@/components/ui/sheet";
 import { FilterContent } from "@/views/page-search/FilterContent";
 import FlightCard from "@/views/page-search/FlightCard";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 export default function SearchPage() {
   const { flights, searchParams, isLoading } = useSearch();
   const { user } = useAuth();
   const router = useRouter();
+
+  const [openSearchBox, setOpenSearchBox] = useState(false);
 
   // Filter states
   const [priceRange, setPriceRange] = useState([165, 450]);
@@ -56,18 +50,14 @@ export default function SearchPage() {
   // Expandable sections
 
   const handleBookFlight = (flightId: string) => {
-    // if (!user) {
-    //   router.push("/login");
-    //   return;
-    // }
-    // router.push(`/booking/${flightId}`);
-    
     if (!user) {
       // Redirect to login with the booking page as the redirect URL
-      router.push(`/login?redirect=${encodeURIComponent(`/booking/${flightId}`)}`)
-      return
+      router.push(
+        `/login?redirect=${encodeURIComponent(`/booking/${flightId}`)}`
+      );
+      return;
     }
-    router.push(`/booking/${flightId}`)
+    router.push(`/booking/${flightId}`);
   };
 
   // Filtered flights
@@ -177,12 +167,18 @@ export default function SearchPage() {
                 </div>
               </div>
             )}
-            <Dialog>
-              <DialogTrigger className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 ml-auto px-4 rounded-full">
-                Search {searchParams ? "Again" : "Flights"}
-              </DialogTrigger>
+            <button
+              onClick={() => setOpenSearchBox(true)}
+              className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 ml-auto px-4 rounded-full"
+            >
+              Search {searchParams ? "Again" : "Flights"}
+            </button>
+            <Dialog
+              open={openSearchBox}
+              onOpenChange={() => setOpenSearchBox(false)}
+            >
               <DialogContent className="p-0 md:min-w-[800px]">
-                <SearchForm />
+                <SearchForm setOpenSearchBox={setOpenSearchBox} />
               </DialogContent>
             </Dialog>
           </div>

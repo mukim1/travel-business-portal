@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useAuth } from "@/contexts/AuthContext"
 import { Plane } from "lucide-react"
+import { toast } from "sonner"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -35,7 +36,8 @@ export default function LoginPage() {
       await login(email, password)
       // The useEffect above will handle the redirect once user state is updated
     } catch (error) {
-      alert("Login failed. Please try again.")
+      toast.error("Login failed. Please try again.")
+      console.error("Login error:", error)
     } finally {
       setIsLoading(false)
     }
@@ -106,7 +108,7 @@ export default function LoginPage() {
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <a href="#" className="text-blue-600 hover:text-blue-500">
                   Sign up
                 </a>

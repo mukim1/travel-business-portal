@@ -15,21 +15,33 @@ import { format } from "date-fns";
 import { useSearch } from "@/contexts/SearchContext";
 import { cn } from "@/lib/utils"; // Assuming cn is a utility for combining class names
 import { toast } from "sonner";
+import { SearchParams } from "@/types/search-flight";
 
 // --- Main Component ---
 
-export default function SearchForm() {
+export default function SearchForm({
+  setOpenSearchBox,
+}: {
+  setOpenSearchBox?: (visible: boolean) => void;
+}) {
   const router = useRouter();
-  const { searchFlights } = useSearch();
+  const { searchFlights, searchParams: sp } = useSearch();
   const [tripType, setTripType] = useState<"one-way" | "round-trip">("one-way");
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [departureDate, setDepartureDate] = useState<Date>();
-  const [returnDate, setReturnDate] = useState<Date>();
+  const [origin, setOrigin] = useState(sp?.origin || "");
+  const [destination, setDestination] = useState(sp?.destination || "");
+  const [departureDate, setDepartureDate] = useState<Date>(
+    sp?.departureDate
+      ? new Date(sp.departureDate)
+      : new Date(new Date().setDate(new Date().getDate() + 1)) // Default to tomorrow if no date is set
+  );
+  // new Date(sp?.departureDate || "")
+  const [returnDate, setReturnDate] = useState<Date | undefined>(
+    sp?.returnDate ? new Date(sp.returnDate) : undefined // Return date is optional
+  );
   const [passengers, setPassengers] = useState({
-    adult: 1,
-    children: 0,
-    infant: 0,
+    adult: sp?.passenger.adult || 0,
+    children: sp?.passenger.children || 0,
+    infant: sp?.passenger.infant || 0,
   });
 
   const handleSearch = useCallback(async () => {
@@ -37,6 +49,11 @@ export default function SearchForm() {
       toast.error(
         "Please fill in all required fields (Origin, Destination, and Departure Date)."
       );
+      return;
+    }
+
+    if (passengers.adult < 1) {
+      toast.error("At least one adult passenger is required.");
       return;
     }
 
@@ -61,8 +78,9 @@ export default function SearchForm() {
       tripType,
     };
 
-    await searchFlights(searchParams as any); // Type assertion might be avoided with proper typing of searchFlights
+    await searchFlights(searchParams as SearchParams); // Type assertion might be avoided with proper typing of searchFlights
     router.push("/search");
+    setOpenSearchBox?.(false);
   }, [
     origin,
     destination,
@@ -160,7 +178,8 @@ export default function SearchForm() {
                 mode="single"
                 selected={departureDate}
                 onSelect={setDepartureDate}
-                initialFocus
+                // initialFocus
+                required
               />
             </PopoverContent>
           </Popover>
@@ -190,7 +209,6 @@ export default function SearchForm() {
                 mode="single"
                 selected={returnDate}
                 onSelect={setReturnDate}
-                initialFocus
               />
             </PopoverContent>
           </Popover>

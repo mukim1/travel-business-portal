@@ -1,7 +1,18 @@
 import { Star } from "lucide-react";
 import Image from "next/image";
 
-export const DestinationCard = ({ destination }: any) => {
+export const DestinationCard = ({
+  destination,
+}: {
+  destination: {
+    id: number;
+    name: string;
+    rating: number;
+    price: string;
+    description: string;
+    image: string;
+  };
+}) => {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       {/* Image container with Next.js optimized images */}

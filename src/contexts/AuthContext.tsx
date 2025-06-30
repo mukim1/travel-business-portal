@@ -30,13 +30,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(JSON.parse(savedUser));
       } catch (error) {
         // If there's an error parsing, remove the invalid data
+        console.log(error)
         localStorage.removeItem("user");
       }
     }
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string) => {
     // Simulate Firebase login
     setIsLoading(true);
     try {
@@ -52,6 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(mockUser);
       localStorage.setItem("user", JSON.stringify(mockUser));
     } catch (error) {
+      console.log(error)
       throw new Error("Login failed");
     } finally {
       setIsLoading(false);

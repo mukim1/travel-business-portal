@@ -1,63 +1,19 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { createContext, useContext, useState } from "react"
+import { Flight, SearchContextType, SearchParams } from "@/types/search-flight";
+import type React from "react";
+import { createContext, useContext, useState } from "react";
 
-interface SearchParams {
-  origin: string
-  destination: string
-  departureDate: string
-  returnDate?: string
-  passenger: {
-    adult: number
-    children: number
-    infant: number
-  }
-  tripType: "one-way" | "round-trip"
-}
-
-interface Flight {
-  id: string
-  airline: string
-  logo: string
-  departure: {
-    time: string
-    airport: string
-    code: string
-  }
-  arrival: {
-    time: string
-    airport: string
-    code: string
-  }
-  duration: string
-  stops: number
-  price: number
-  currency: string
-  refundable: boolean
-  class: string
-  aircraft: string
-  flightNumber: string
-}
-
-interface SearchContextType {
-  searchParams: SearchParams | null
-  flights: Flight[]
-  setSearchParams: (params: SearchParams) => void
-  searchFlights: (params: SearchParams) => Promise<void>
-  isLoading: boolean
-}
-
-const SearchContext = createContext<SearchContextType | undefined>(undefined)
+const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export function SearchProvider({ children }: { children: React.ReactNode }) {
-  const [searchParams, setSearchParams] = useState<SearchParams | null>(null)
-  const [flights, setFlights] = useState<Flight[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [searchParams, setSearchParams] = useState<SearchParams | null>(null);
+  const [flights, setFlights] = useState<Flight[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchFlights = async (params: SearchParams) => {
-    setIsLoading(true)
-    setSearchParams(params)
+    setIsLoading(true);
+    setSearchParams(params);
 
     try {
       // Comprehensive dummy flight data
@@ -67,8 +23,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "SQ001",
           airline: "Singapore Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "12:10", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "15:30", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "12:10",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "15:30",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "3h 20min",
           stops: 0,
           price: 110,
@@ -82,8 +46,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "SQ002",
           airline: "Singapore Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "08:15", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "14:45", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "08:15",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "14:45",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 324,
@@ -97,8 +69,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "SQ003",
           airline: "Singapore Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "23:45", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "06:15", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "23:45",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "06:15",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 289,
@@ -114,8 +94,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "QR001",
           airline: "Qatar Airways",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "12:10", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "15:30", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "12:10",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "15:30",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "3h 20min",
           stops: 0,
           price: 435,
@@ -129,8 +117,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "QR002",
           airline: "Qatar Airways",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "14:20", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "20:50", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "14:20",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "20:50",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 349,
@@ -144,8 +140,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "QR003",
           airline: "Qatar Airways",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "18:55", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "01:25", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "18:55",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "01:25",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 298,
@@ -161,8 +165,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "EK001",
           airline: "Emirates",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "12:10", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "15:30", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "12:10",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "15:30",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "3h 20min",
           stops: 0,
           price: 330,
@@ -176,8 +188,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "EK002",
           airline: "Emirates",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "22:30", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "05:00", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "22:30",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "05:00",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 0,
           price: 450,
@@ -191,8 +211,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "EK003",
           airline: "Emirates",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "16:40", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "23:10", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "16:40",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "23:10",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 275,
@@ -208,8 +236,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "SV001",
           airline: "Saudi Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "12:10", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "15:30", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "12:10",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "15:30",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "3h 20min",
           stops: 0,
           price: 200,
@@ -223,8 +259,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "SV002",
           airline: "Saudi Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "09:25", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "15:55", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "09:25",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "15:55",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 185,
@@ -240,8 +284,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "NH001",
           airline: "ANA All Nippon",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "16:45", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "23:15", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "16:45",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "23:15",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 280,
@@ -255,8 +307,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "NH002",
           airline: "ANA All Nippon",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "11:30", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "18:00", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "11:30",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "18:00",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 315,
@@ -272,8 +332,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "CX001",
           airline: "Cathay Pacific",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "10:30", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "17:00", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "10:30",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "17:00",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 2,
           price: 250,
@@ -287,8 +355,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "CX002",
           airline: "Cathay Pacific",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "20:15", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "02:45", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "20:15",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "02:45",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 2,
           price: 225,
@@ -304,8 +380,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "AF001",
           airline: "Air France",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "18:15", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "01:45", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "18:15",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "01:45",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "7h 30min",
           stops: 1,
           price: 380,
@@ -319,8 +403,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "AF002",
           airline: "Air France",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "13:40", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "21:10", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "13:40",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "21:10",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "7h 30min",
           stops: 1,
           price: 295,
@@ -336,8 +428,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "TK001",
           airline: "Turkish Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "01:20", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "07:50", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "01:20",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "07:50",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 265,
@@ -351,8 +451,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "TK002",
           airline: "Turkish Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "15:30", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "22:00", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "15:30",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "22:00",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 340,
@@ -368,8 +476,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "EY001",
           airline: "Etihad Airways",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "07:45", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "14:15", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "07:45",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "14:15",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 310,
@@ -383,8 +499,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "EY002",
           airline: "Etihad Airways",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "19:25", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "01:55", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "19:25",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "01:55",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 395,
@@ -400,8 +524,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "LH001",
           airline: "Lufthansa",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "14:50", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "21:20", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "14:50",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "21:20",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 2,
           price: 285,
@@ -417,8 +549,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "BA001",
           airline: "British Airways",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "21:10", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "03:40", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "21:10",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "03:40",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 355,
@@ -434,8 +574,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "KL001",
           airline: "KLM Royal Dutch",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "12:35", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "19:05", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "12:35",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "19:05",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 2,
           price: 270,
@@ -451,8 +599,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "TG001",
           airline: "Thai Airways",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "17:20", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "23:50", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "17:20",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "23:50",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 305,
@@ -468,8 +624,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "MH001",
           airline: "Malaysia Airlines",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "06:30", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "13:00", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "06:30",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "13:00",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 245,
@@ -485,8 +649,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "WY001",
           airline: "Oman Air",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "03:15", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "09:45", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "03:15",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "09:45",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 1,
           price: 235,
@@ -502,8 +674,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "6E001",
           airline: "IndiGo",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "05:45", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "12:15", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "05:45",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "12:15",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 2,
           price: 175,
@@ -519,8 +699,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           id: "SG001",
           airline: "SpiceJet",
           logo: "/placeholder.svg?height=40&width=40",
-          departure: { time: "22:50", airport: "Hazrat Shahjalal International", code: "DAC" },
-          arrival: { time: "05:20", airport: "Dubai International Airport", code: "DXB" },
+          departure: {
+            time: "22:50",
+            airport: "Hazrat Shahjalal International",
+            code: "DAC",
+          },
+          arrival: {
+            time: "05:20",
+            airport: "Dubai International Airport",
+            code: "DXB",
+          },
           duration: "6h 30min",
           stops: 2,
           price: 165,
@@ -530,15 +718,15 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
           aircraft: "Boeing 737-800",
           flightNumber: "SG 171",
         },
-      ]
+      ];
 
-      setFlights(mockFlights)
+      setFlights(mockFlights);
     } catch (error) {
-      console.error("Search failed:", error)
+      console.error("Search failed:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <SearchContext.Provider
@@ -552,13 +740,13 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
     >
       {children}
     </SearchContext.Provider>
-  )
+  );
 }
 
 export function useSearch() {
-  const context = useContext(SearchContext)
+  const context = useContext(SearchContext);
   if (context === undefined) {
-    throw new Error("useSearch must be used within a SearchProvider")
+    throw new Error("useSearch must be used within a SearchProvider");
   }
-  return context
+  return context;
 }

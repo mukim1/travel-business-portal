@@ -36,20 +36,20 @@ export default function Header() {
   }, []);
 
   // Determine header background, text color, and position based on path and sticky state
-  const isHomePage = pathname === "/";
-  const headerBg = isHomePage && !isSticky ? "bg-transparent" : "bg-gray-900";
+  // const headerBg = isHomePage && !isSticky ? "bg-transparent" : "bg-gray-900";
   // const headerPosition = isHomePage && !isSticky ? "absolute" : "sticky top-0";
+  // const textColor =
+  //   isHomePage && !isSticky
+  //     ? "text-gray-200"
+  //     : "text-gray-200 md:text-gray-600";
+  // const logoTextColor =
+  //   isHomePage && !isSticky ? "text-gray-100" : "text-blue-600";
+  const isHomePage = pathname === "/";
   const headerPosition = isHomePage
     ? isSticky
       ? "fixed top-0"
       : "absolute"
     : "sticky top-0";
-  const textColor =
-    isHomePage && !isSticky
-      ? "text-gray-200"
-      : "text-gray-200 md:text-gray-600";
-  const logoTextColor =
-    isHomePage && !isSticky ? "text-gray-100" : "text-blue-600";
   const navLinkColor =
     isHomePage && !isSticky ? "text-gray-200" : "text-gray-600";
   const authTextColor =
