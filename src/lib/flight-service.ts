@@ -351,6 +351,7 @@ export class FlightService {
     duration: number,
     stops: number
   ): { departure: string; arrival: string } {
+    console.log(stops)
     const baseHours = [6, 8, 10, 12, 14, 16, 18, 20, 22];
     const departureHour =
       baseHours[Math.floor(Math.random() * baseHours.length)];
@@ -378,7 +379,8 @@ export class FlightService {
     passengers: number
   ): FlightData {
     const availability = { ...flight.seatAvailability };
-    const demand = Math.random();
+    // const demand = Math.random();
+    console.log(passengers)
 
     // Simulate booking activity
     if (flight.class === "Economy") {

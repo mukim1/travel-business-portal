@@ -22,7 +22,7 @@ A modern travel booking platform built with Next.js, React, and TypeScript. This
 
 ## 🛠 Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: React Context API
@@ -154,7 +154,7 @@ Password: password123
 - **TypeScript**: Full type safety throughout the application
 
 ### Performance Optimizations
-- **Server Components**: Leveraging Next.js 14 App Router for better performance
+- **Server Components**: Leveraging Next.js 15 App Router for better performance
 - **Code Splitting**: Automatic route-based code splitting
 - **Image Optimization**: Next.js Image component for optimized loading
 - **Lazy Loading**: Components loaded on demand

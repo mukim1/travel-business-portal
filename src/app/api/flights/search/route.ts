@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
       ?.split(",")
       .map(Number)
       .filter((n) => !isNaN(n));
-    const flightClass = searchParams.get("class");
+    // const flightClass = searchParams.get("class");
 
     if (!origin || !destination || !departureDate) {
       return NextResponse.json(

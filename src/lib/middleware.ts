@@ -3,7 +3,12 @@ import { validateSession } from "./auth"
 
 export async function withAuth(
   request: NextRequest,
-  handler: (request: NextRequest, user: any) => Promise<NextResponse>,
+  handler: (request: NextRequest, user: {
+    id: string
+    email: string
+    name: string
+    createdAt: Date
+  }) => Promise<NextResponse>,
 ) {
   try {
     const authHeader = request.headers.get("authorization")
